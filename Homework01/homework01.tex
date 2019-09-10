@@ -151,7 +151,7 @@
         \item Exponential
         \begin{equation*}
           \begin{split}
-             E(X) & = \int_{0}^{\infty}\frac{\lambda x}{e^{\lambda x}}dx\\
+             E[X] & = \int_{0}^{\infty}\frac{\lambda x}{e^{\lambda x}}dx\\
                & = \frac{1}{\lambda}\int_{0}^{\infty}\frac{t}{e^t}dt,\quad\text{with $t=\lambda x$}\\
                &=\frac{-1}{\lambda}\int_{0}^{\infty}td(\frac{1}{e^t})\\
                & =\frac{-1}{\lambda}\bigg(\frac{t}{e^t}\bigg|^\infty_0-\int_{0}^{\infty}\frac{1}{e^t}dt\bigg)\\
@@ -162,7 +162,7 @@
 
         \begin{equation*}
           \begin{split}
-             E(X^2) &=\frac{1}{\lambda^2}\int_{0}^{\infty}\frac{t^2}{e^t}dt,\quad\text{with $t=\lambda x$}\\
+             E[X^2] &=\frac{1}{\lambda^2}\int_{0}^{\infty}\frac{t^2}{e^t}dt,\quad\text{with $t=\lambda x$}\\
                &=\frac{-1}{\lambda^2}\int_{0}^{\infty}t^2d(\frac{1}{e^t})\\
                &=\frac{-1}{\lambda^2}\bigg(\frac{t^2}{e^t}\bigg|^\infty_0-2\int_{0}^{\infty}\frac{t}{e^t}dt\bigg)\\
                &=\frac{-1}{\lambda^2}[(0-0)-2]\quad\text{from equations above}\\
@@ -172,12 +172,12 @@
 
         Therefore, 
         \begin{equation*}
-            \sigma^2(X)= E(X^2)-[E(X)]^2=\frac{1}{\lambda^2}
+            \sigma^2_X= E(X^2)-[E(X)]^2=\frac{1}{\lambda^2}
         \end{equation*}
 
         \begin{equation*}
           \begin{split}
-             M_X(r) & =\int_{-\infty}^{\infty}\frac{\lambda e^{rx}}{e^{tx}}dx \\
+             g_M(r) & =\int_{-\infty}^{\infty}\frac{\lambda e^{rx}}{e^{tx}}dx \\
                & =\lambda\int_{0}^{\infty}e^{(r-\lambda)x}dx\\
                & =\frac{\lambda}{r-\lambda}e^{(r-\lambda)x}\big|^\infty_0\\
                &=\frac{\lambda}{r-\lambda}(0-1),\quad\text{with $r<\lambda$, otherwise $\lim_{x\rightarrow\infty}e^{(r-\lambda)x}=\infty$}\\
@@ -188,7 +188,7 @@
         \item Erlang
             \begin{equation*}
                 \begin{split}
-                    E(X) &=\int_{0}^\infty\frac{(\lambda x)^{n}}{(n-1)!e^{\lambda x}}dx\\
+                    E[X] &=\int_{0}^\infty\frac{(\lambda x)^{n}}{(n-1)!e^{\lambda x}}dx\\
                     &=\frac{1}{(n-1)!\lambda}\int_0^\infty\frac{t^n}{e^t}dt,\quad\text{with $t=\lambda x$}\\
                     &=\frac{-1}{(n-1)!\lambda}\int_0^\infty t^nd(\frac{1}{e^t})\\
                     &=\frac{-1}{(n-1)!\lambda}\bigg[\frac{t^n}{e^t}\bigg|^\infty_0-n\int^\infty_0\frac{t^{n-1}}{e^t}dt\bigg]\\
@@ -200,7 +200,7 @@
             \end{equation*}
             \begin{equation*}
                 \begin{split}
-                    E(X^2) &= \int^\infty_{0}\frac{\lambda^nx^{n+1}}{(n-1)!e^{\lambda x}}dx\\
+                    E[X^2] &= \int^\infty_{0}\frac{\lambda^nx^{n+1}}{(n-1)!e^{\lambda x}}dx\\
                     &= \frac{1}{(n-1)!\lambda^2}\int_0^\infty\frac{t^{n+1}}{e^t}dt\\
                     &= \frac{1}{(n-1)!\lambda^2}\cdot(n+1)!\\
                     &= \frac{n^2+n}{\lambda^2}
@@ -208,12 +208,12 @@
             \end{equation*}
             Therefore, 
             \begin{equation*}
-                \sigma^2(X)=E(X^2)-[E(X)]^2=\frac{n^2+n}{\lambda^2}-\frac{n^2}{\lambda^2}=\frac{n}{\lambda^2}
+                \sigma^2_X=E(X^2)-[E(X)]^2=\frac{n^2+n}{\lambda^2}-\frac{n^2}{\lambda^2}=\frac{n}{\lambda^2}
             \end{equation*}
 
             \begin{equation*}
                 \begin{split}
-                    M_X(r) &=\int^\infty_{0}\frac{\lambda^nx^{n-1}e^{rx}}{(n-1)!e^{\lambda x}}dx\\
+                    g_M(r) &=\int^\infty_{0}\frac{\lambda^nx^{n-1}e^{rx}}{(n-1)!e^{\lambda x}}dx\\
                     &=\frac{\lambda^n}{(n-1)!}\int^\infty_0x^{n-1}e^{(r-\lambda)x}dx\\
                     &=\frac{\lambda^n}{(n-1)!}\cdot\frac{1}{r-\lambda}\cdot\int^\infty_0x^{n-1}de^{(r-\lambda)x}\\
                     &=\frac{\lambda^n}{(n-1)!}\cdot\frac{1}{r-\lambda}\cdot\bigg[x^{n-1}e^{(r-\lambda)x}\bigg|^\infty_0-\int^\infty_0e^{(r-\lambda)x}d(x^{n-1})\bigg]\\
@@ -229,7 +229,7 @@
             \item Gaussian
             \begin{equation*}
                 \begin{split}
-                    E(X) &= \int_{-\infty}^\infty\frac{x}{\sigma\sqrt{2\pi}}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
+                    E[X] &= \int_{-\infty}^\infty\frac{x}{\sigma\sqrt{2\pi}}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
                     &=\frac{1}{\sigma\sqrt{2\pi}}\int^\infty_{-\infty}xe^{-(\frac{x-a}{\sqrt{2}\sigma})^2}dx \\
                     &=\frac{1}{\sqrt{\pi}}\int^\infty_{-\infty}\frac{\sqrt{2}\sigma t+a}{e^{t^2}}dt,\quad\text{with $t=\frac{x-a}{\sqrt{2}\sigma}$}\\
                     &=\frac{1}{\sqrt{\pi}}\bigg[\int^\infty_{-\infty}\frac{\sqrt{2}\sigma t}{e^{t^2}}dt+\int^\infty_{-\infty}\frac{a}{e^{t^2}}dt\bigg]\\
@@ -252,7 +252,7 @@
 
             \begin{equation*}
                 \begin{split}
-                    E(X^2) &= \int_{-\infty}^\infty\frac{x^2}{\sigma\sqrt{2\pi}}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
+                    E[X^2] &= \int_{-\infty}^\infty\frac{x^2}{\sigma\sqrt{2\pi}}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
                     &=\frac{1}{\sigma\sqrt{2\pi}}\int_{_\infty}^\infty x^2e^{-(\frac{x-a}{\sqrt{2}\sigma})^2}dx \\
                     &=\frac{1}{\sqrt{\pi}}\int^\infty_{-\infty}\frac{2\sigma^2t^2+2\sqrt{2}\sigma at+a^2}{e^{t^2}}dt\\
                     &=\frac{2\sigma^2}{\sqrt{\pi}}\int^\infty_{-\infty}\frac{t^2}{e^{t^2}}dt+\frac{2\sqrt{2}\sigma a}{\sqrt{\pi}}\int^\infty_{-\infty}\frac{t}{e^{t^2}}dt+\frac{a^2}{\sqrt{\pi}}\int^\infty_{-\infty}\frac{1}{e^{t^2}}dt\\
@@ -284,12 +284,12 @@
 
             And
             \begin{equation*}
-                \sigma(X)=E(X^2)-[E(X)]^2=\sigma^2+a^2-a^2=\sigma^2
+                \sigma^2_X=E(X^2)-[E(X)]^2=\sigma^2+a^2-a^2=\sigma^2
             \end{equation*}
 
             \begin{equation*}
                 \begin{split}
-                    M_X(r)&=\int^\infty_{-\infty}\frac{1}{\sigma\sqrt{2\pi}}e^{rx}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
+                    g_M(r)&=\int^\infty_{-\infty}\frac{1}{\sigma\sqrt{2\pi}}e^{rx}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
                     &=\frac{1}{\sigma\sqrt{2\pi}}\int^\infty_{-\infty}e^{rx-(\frac{x-a}{\sqrt{2}\sigma})^2}dx\\
                     &=\frac{1}{\sqrt{\pi}}\int^{\infty}_{-\infty}e^{-(t^2-\sqrt{2}r\sigma t-ra)}dt,\quad\text{with $t=\frac{x-a}{\sqrt{2}\sigma}$}\\
                     &= \frac{e^{ra}}{\sqrt{\pi}}\int^\infty_{-\infty}e^{-(t^2-\sqrt{2}r\sigma t+\frac{r^2\sigma^2}{2})+\frac{r^2\sigma^2}{2}}dt\\
@@ -304,14 +304,14 @@
             \item Uniform
             \begin{equation*}
                 \begin{split}
-                    E(X) &= \int^a_0\frac{x}{a}dx\\
+                    E[X] &= \int^a_0\frac{x}{a}dx\\
                         &= \frac{1}{2a}\cdot x^2\big|^a_0\\
                         &=\frac{a}{2}
                 \end{split}
             \end{equation*}
             \begin{equation*}
                 \begin{split}
-                    E(X^2) &=\int^a_0\frac{x^2}{a}dx\\
+                    E[X^2] &=\int^a_0\frac{x^2}{a}dx\\
                     &=\frac{1}{3a}\cdot x^3\big|^a_0\\
                     &=\frac{a^2}{3}
                 \end{split}
@@ -319,12 +319,12 @@
 
             Therefore, 
             \begin{equation*}
-                \sigma(X)=E(X^2)-[E(X)]^2=\frac{a^2}{3}-\frac{a^2}{4}=\frac{a^2}{12}
+                \sigma^2_X=E(X^2)-[E(X)]^2=\frac{a^2}{3}-\frac{a^2}{4}=\frac{a^2}{12}
             \end{equation*}
             
             \begin{equation*}
                 \begin{split}
-                    M_X(r)&=\int^a_0\frac{e^{rx}}{a}dx\\
+                    g_M(r)&=\int^a_0\frac{e^{rx}}{a}dx\\
                     &=\frac{1}{ra}\cdot e^{rx}\big|^a_0\\
                     &=\frac{e^{ra}-1}{ra}
                 \end{split}
@@ -355,31 +355,31 @@
         \item Binary
             \begin{equation*}
                 \begin{split}
-                    E(X) &= 1\cdot p+0\cdot(1-p)\\
+                    E[X] &= 1\cdot p+0\cdot(1-p)\\
                     &=p                    
                 \end{split}            
             \end{equation*}
             \begin{equation*}
                 \begin{split}
-                    E(X^2) &= 1^2\cdot p+0^2\cdot(1-p)\\
+                    E[X^2] &= 1^2\cdot p+0^2\cdot(1-p)\\
                     &= p
                 \end{split}
             \end{equation*}
         Then, 
             \begin{equation*}
-                \sigma(X)=E(X^2)-[E(X)]^2=p(1-p)
+                \sigma^2_X=E(X^2)-[E(X)]^2=p(1-p)
             \end{equation*}
             
             \begin{equation*}
                 \begin{split}
-                    M_X(r) &= e^{r\cdot1}*p+e^{r\cdot0}(1-p)\\
+                    g_M(r) &= e^{r\cdot1}*p+e^{r\cdot0}(1-p)\\
                     &=1-p+pe^r
                 \end{split}
             \end{equation*}
         \item Binomial
             \begin{equation*}
                 \begin{split}
-                    E(X) &=\sum^n_{k=0}k\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
+                    E[X] &=\sum^n_{k=0}k\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
                     &=\sum^n_{k=1}k\cdot\frac{n!}{(n-k)!k!}p^k(1-p)^{n-k}\\
                     &=np\sum^n_{k=1}\frac{(n-1)!}{(n-k)!(k-1)!}p^{k-1}(1-p)^{n-k}\\
                     &=np\sum^{n}_{k=1}\frac{(n-1)!}{[(n-1)-(k-1)]!(k-1)!}p^{k-1}(1-p)^{[(n-1)-(k-1)]}\\
@@ -393,7 +393,7 @@
 
         \begin{equation*}
             \begin{split}
-                E(X^2) &= \sum^n_{k=0}k^2\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
+                E[X^2] &= \sum^n_{k=0}k^2\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
                 &= \sum^n_{k=1}k^2\cdot\frac{n!}{(n-k)!k!}p^k(1-p)^{n-k}\\
                 &= np\sum^n_{k=1}k\cdot\frac{(n-1)!}{(n-k!)(k-1)!}p^{k-1}(1-p)^{n-k}\\
                 &=np\sum^n_{k=1}k\cdot\frac{(n-1)!}{[(n-1)-(k-1)]!(k-1)!}p^{k-1}(1-p)^{(n-1)-(k-1)}\\
@@ -408,12 +408,12 @@
 
         Then,
         \begin{equation*}
-            \sigma(X)=E(X^2)-[E(X)]^2=n^2p^2+np(1-p)-n^2p^2=np(1-p)
+            \sigma^2_X=E(X^2)-[E(X)]^2=n^2p^2+np(1-p)-n^2p^2=np(1-p)
         \end{equation*}
 
         \begin{equation*}
             \begin{split}
-                M_X(r) &= \sum^n_{k=0}e^{rk}\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
+                g_M(r) &= \sum^n_{k=0}e^{rk}\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
                 &=\sum^n_{k=0}\binom{n}{k}(pe^r)^k(1-p)^{n-k}\\
                 &=(1-p+pe^r)^n,\quad\text{according to the binomial theorem}
             \end{split}
@@ -423,7 +423,7 @@
         let $q=1-p$, then 
         \begin{equation*}
             \begin{split}
-                E(X) &=\sum^\infty_{k=1}kpq^{k-1}\\
+                E[X] &=\sum^\infty_{k=1}kpq^{k-1}\\
                 &=p\sum^\infty_{k=1}kq^{k-1}\\
                 &=p\frac{d(\sum^\infty_{k=1}q^k)}{dq}\\
                 &=p\frac{d(\sum^\infty_{t=0}q^t)}{dq}\\
@@ -435,7 +435,7 @@
 
         \begin{equation*}
             \begin{split}
-                E(X^2) &= \sum^\infty_{k=1}k^2pq^{k-1}\\
+                E[X^2] &= \sum^\infty_{k=1}k^2pq^{k-1}\\
                 &=p\bigg[\sum^\infty_{k=1}k(k-1)q^{k-1}+\sum^\infty_{k=1}kq^{k-1}\bigg]\\
                 &=p\bigg[\sum^\infty_{k=1}k(k-1)q^{k-1}+\frac{1}{p^2}\bigg],\quad\text{from the fact before}
             \end{split}
@@ -453,7 +453,7 @@
         Therefore,
         \begin{equation*}
             \begin{split}
-                E(X^2) &= p(\frac{2q}{p^3}+\frac{1}{p^2})\\
+                E[X^2] &= p(\frac{2q}{p^3}+\frac{1}{p^2})\\
                 &=\frac{2q}{p^2}+\frac{1}{p}\\
                 &=\frac{2-p}{p^2}
             \end{split}
@@ -461,12 +461,12 @@
         
         And
         \begin{equation*}
-            \sigma(X)=E(X^2)-[E(X)]^2=\frac{2-p}{p}-\frac{1}{p^2}=\frac{1-p}{p^2}
+            \sigma^2_X=E(X^2)-[E(X)]^2=\frac{2-p}{p}-\frac{1}{p^2}=\frac{1-p}{p^2}
         \end{equation*}
 
         \begin{equation*}
             \begin{split}
-                M_X(r) &= \sum^\infty_{k=1}pe^{rk}(1-p)^{k-1}\\
+                g_M(r) &= \sum^\infty_{k=1}pe^{rk}(1-p)^{k-1}\\
                 &=\frac{p}{1-p}\sum^\infty_{k=1}e^{rk}(1-p)^{k}\\
                 &=\frac{p}{1-p}\sum^\infty_{k=1}[(1-p)e^r]^k\\
                 &=\frac{p}{1-p}\cdot\lim_{n\rightarrow\infty}\frac{(1-p)e^r\big(1-[(1-p)e^r)]\big)^n}{1-（1-(1-p)e^r}\\
@@ -477,7 +477,7 @@
         \item Poisson
             \begin{equation*}
                 \begin{split}
-                    E(X) &= \sum^\infty_{k=0}\frac{k\lambda^k}{k!e^\lambda}\\
+                    E[X] &= \sum^\infty_{k=0}\frac{k\lambda^k}{k!e^\lambda}\\
                     &=\frac{1}{e^\lambda}\sum^\infty_{k=1}\frac{k\lambda^k}{k!}\\
                     &=\frac{\lambda}{e^\lambda}\sum^\infty_{k=1}\frac{\lambda^{k-1}}{(k-1)!}\\
                     &=\frac{\lambda}{e^\lambda}\sum^\infty_{n=0}\frac{\lambda^n}{n!}\\
@@ -487,7 +487,7 @@
             \end{equation*}
             \begin{equation*}
                 \begin{split}
-                    E(X^2) &=\sum^\infty_{k=0}\frac{k^2\lambda^k}{k!e^\lambda}\\
+                    E[X^2] &=\sum^\infty_{k=0}\frac{k^2\lambda^k}{k!e^\lambda}\\
                     &=\frac{1}{e^\lambda}\sum^\infty_{k=1}\frac{k^2\lambda^k}{k!}\\
                     &=\frac{\lambda}{e^\lambda}\sum^\infty_{k=1}\frac{k\lambda^k}{(k-1)!}\\
                     &=\frac{\lambda}{e^\lambda}\sum^\infty_{n=0}\frac{(n+1)\lambda^n}{n!}\\
@@ -498,12 +498,12 @@
             \end{equation*}
         Then,
         \begin{equation*}
-            \sigma(X)=E(X^2)-[E(X)]^2=\lambda^2+\lambda-\lambda^2=\lambda
+            \sigma^2_X=E(X^2)-[E(X)]^2=\lambda^2+\lambda-\lambda^2=\lambda
         \end{equation*}
         
         \begin{equation*}
             \begin{split}
-                M_X(r) &=\sum^\infty_{k=0}\frac{\lambda^k e^{rk}}{k!e^\lambda}\\
+                g_M(r) &=\sum^\infty_{k=0}\frac{\lambda^k e^{rk}}{k!e^\lambda}\\
                 &=\frac{1}{e^\lambda}\sum^\infty_{k=0}\frac{(\lambda e^r)^k}{k!}\\
                 &=\frac{1}{e^\lambda}\cdot e^{\lambda e^r}\\
                 &=\exp[\lambda(e^r-1)]
