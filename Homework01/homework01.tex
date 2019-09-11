@@ -122,9 +122,15 @@
         (\ref{eq:11}) is proved.
         \item To verify (\ref{eq:12}), from example 9, we can know that $B_1,B_n,\dots$ are disjoint and $\cup^\infty_{n=1}A_n=\cup^\infty_{n=1}B_n$. Since $B_n=A_n-\cup^{n-1}_{m=1}A_m$ which means $B_n\subseteq A_n$ and then according to \textcolor{red}{(\ref{eq:5})}, $\text{Pr}\{B_n\}\leq\text{Pr}\{A_n\}$. Therefore, in terms of \textcolor{red}{(\ref{eq:1})} and \textcolor{red}{(\ref{eq:5})}
         \begin{equation*}
-            \text{Pr}\{\cup_nA_n\}=\text{Pr}\{\cup^nB_n\}=\sum_n\text{Pr}\{B_n\}\leq\sum_n\text{Pr}\{A_n\}
+            \text{Pr}\{\cup_nA_n\}=\text{Pr}\{\cup_nB_n\}=\sum_n\text{Pr}\{B_n\}\leq\sum_n\text{Pr}\{A_n\}
         \end{equation*}
     \end{enumerate}
+
+    The relationship among these formulae can be showed as follow:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=3.0in]{relationship.png}
+    \end{figure}
 
     \section{Verify the means, variances and MGFs of the rv.s given in Table 1.1 and Table 1.2 according to their PDFs/PMFs.}
     \begin{table}[h]
@@ -172,7 +178,7 @@
 
         Therefore, 
         \begin{equation*}
-            \sigma^2_X= E(X^2)-[E(X)]^2=\frac{1}{\lambda^2}
+            \sigma^2_X= E[X^2]-(E[X])^2=\frac{1}{\lambda^2}
         \end{equation*}
 
         \begin{equation*}
@@ -208,7 +214,7 @@
             \end{equation*}
             Therefore, 
             \begin{equation*}
-                \sigma^2_X=E(X^2)-[E(X)]^2=\frac{n^2+n}{\lambda^2}-\frac{n^2}{\lambda^2}=\frac{n}{\lambda^2}
+                \sigma^2_X=E[X^2]-(E[X])^2=\frac{n^2+n}{\lambda^2}-\frac{n^2}{\lambda^2}=\frac{n}{\lambda^2}
             \end{equation*}
 
             \begin{equation*}
@@ -284,7 +290,7 @@
 
             And
             \begin{equation*}
-                \sigma^2_X=E(X^2)-[E(X)]^2=\sigma^2+a^2-a^2=\sigma^2
+                \sigma^2_X=E[X^2]-(E[X])^2=\sigma^2+a^2-a^2=\sigma^2
             \end{equation*}
 
             \begin{equation*}
@@ -319,7 +325,7 @@
 
             Therefore, 
             \begin{equation*}
-                \sigma^2_X=E(X^2)-[E(X)]^2=\frac{a^2}{3}-\frac{a^2}{4}=\frac{a^2}{12}
+                \sigma^2_X=E[X^2]-(E[X])^2=\frac{a^2}{3}-\frac{a^2}{4}=\frac{a^2}{12}
             \end{equation*}
             
             \begin{equation*}
@@ -367,7 +373,7 @@
             \end{equation*}
         Then, 
             \begin{equation*}
-                \sigma^2_X=E(X^2)-[E(X)]^2=p(1-p)
+                \sigma^2_X=E[X^2]-(E[X])^2=p(1-p)
             \end{equation*}
             
             \begin{equation*}
@@ -408,7 +414,7 @@
 
         Then,
         \begin{equation*}
-            \sigma^2_X=E(X^2)-[E(X)]^2=n^2p^2+np(1-p)-n^2p^2=np(1-p)
+            \sigma^2_X=E[X^2]-(E[X])^2=n^2p^2+np(1-p)-n^2p^2=np(1-p)
         \end{equation*}
 
         \begin{equation*}
@@ -461,7 +467,7 @@
         
         And
         \begin{equation*}
-            \sigma^2_X=E(X^2)-[E(X)]^2=\frac{2-p}{p}-\frac{1}{p^2}=\frac{1-p}{p^2}
+            \sigma^2_X=E[X^2]-(E[X])^2=\frac{2-p}{p}-\frac{1}{p^2}=\frac{1-p}{p^2}
         \end{equation*}
 
         \begin{equation*}
@@ -498,7 +504,7 @@
             \end{equation*}
         Then,
         \begin{equation*}
-            \sigma^2_X=E(X^2)-[E(X)]^2=\lambda^2+\lambda-\lambda^2=\lambda
+            \sigma^2_X=E[X^2]-(E[X])^2=\lambda^2+\lambda-\lambda^2=\lambda
         \end{equation*}
         
         \begin{equation*}
