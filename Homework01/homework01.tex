@@ -183,7 +183,7 @@
 
         \begin{equation*}
           \begin{split}
-             g_M(r) & =\int_{-\infty}^{\infty}\frac{\lambda e^{rx}}{e^{tx}}dx \\
+             g_X(r)
                & =\lambda\int_{0}^{\infty}e^{(r-\lambda)x}dx\\
                & =\frac{\lambda}{r-\lambda}e^{(r-\lambda)x}\big|^\infty_0\\
                &=\frac{\lambda}{r-\lambda}(0-1),\quad\text{with $r<\lambda$, otherwise $\lim_{x\rightarrow\infty}e^{(r-\lambda)x}=\infty$}\\
@@ -219,7 +219,7 @@
 
             \begin{equation*}
                 \begin{split}
-                    g_M(r) &=\int^\infty_{0}\frac{\lambda^nx^{n-1}e^{rx}}{(n-1)!e^{\lambda x}}dx\\
+                    g_X(r) &=\int^\infty_{0}\frac{\lambda^nx^{n-1}e^{rx}}{(n-1)!e^{\lambda x}}dx\\
                     &=\frac{\lambda^n}{(n-1)!}\int^\infty_0x^{n-1}e^{(r-\lambda)x}dx\\
                     &=\frac{\lambda^n}{(n-1)!}\cdot\frac{1}{r-\lambda}\cdot\int^\infty_0x^{n-1}de^{(r-\lambda)x}\\
                     &=\frac{\lambda^n}{(n-1)!}\cdot\frac{1}{r-\lambda}\cdot\bigg[x^{n-1}e^{(r-\lambda)x}\bigg|^\infty_0-\int^\infty_0e^{(r-\lambda)x}d(x^{n-1})\bigg]\\
@@ -295,7 +295,7 @@
 
             \begin{equation*}
                 \begin{split}
-                    g_M(r)&=\int^\infty_{-\infty}\frac{1}{\sigma\sqrt{2\pi}}e^{rx}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
+                    g_X(r)&=\int^\infty_{-\infty}\frac{1}{\sigma\sqrt{2\pi}}e^{rx}e^{\frac{-(x-a)^2}{2\sigma^2}}dx\\
                     &=\frac{1}{\sigma\sqrt{2\pi}}\int^\infty_{-\infty}e^{rx-(\frac{x-a}{\sqrt{2}\sigma})^2}dx\\
                     &=\frac{1}{\sqrt{\pi}}\int^{\infty}_{-\infty}e^{-(t^2-\sqrt{2}r\sigma t-ra)}dt,\quad\text{with $t=\frac{x-a}{\sqrt{2}\sigma}$}\\
                     &= \frac{e^{ra}}{\sqrt{\pi}}\int^\infty_{-\infty}e^{-(t^2-\sqrt{2}r\sigma t+\frac{r^2\sigma^2}{2})+\frac{r^2\sigma^2}{2}}dt\\
@@ -330,11 +330,12 @@
             
             \begin{equation*}
                 \begin{split}
-                    g_M(r)&=\int^a_0\frac{e^{rx}}{a}dx\\
+                    g_X(r)&=\int^a_0\frac{e^{rx}}{a}dx\\
                     &=\frac{1}{ra}\cdot e^{rx}\big|^a_0\\
                     &=\frac{e^{ra}-1}{ra}
                 \end{split}
             \end{equation*}
+
 
             The mean, varaince and MGF of the uniform distribution function has been derived.
     \end{enumerate}
@@ -378,7 +379,7 @@
             
             \begin{equation*}
                 \begin{split}
-                    g_M(r) &= e^{r\cdot1}*p+e^{r\cdot0}(1-p)\\
+                    g_X(r) &= e^{r\cdot1}*p+e^{r\cdot0}(1-p)\\
                     &=1-p+pe^r
                 \end{split}
             \end{equation*}
@@ -419,7 +420,7 @@
 
         \begin{equation*}
             \begin{split}
-                g_M(r) &= \sum^n_{k=0}e^{rk}\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
+                g_X(r) &= \sum^n_{k=0}e^{rk}\cdot\binom{n}{k}p^k(1-p)^{n-k}\\
                 &=\sum^n_{k=0}\binom{n}{k}(pe^r)^k(1-p)^{n-k}\\
                 &=(1-p+pe^r)^n,\quad\text{according to the binomial theorem}
             \end{split}
@@ -509,7 +510,7 @@
         
         \begin{equation*}
             \begin{split}
-                g_M(r) &=\sum^\infty_{k=0}\frac{\lambda^k e^{rk}}{k!e^\lambda}\\
+                g_X(r) &=\sum^\infty_{k=0}\frac{\lambda^k e^{rk}}{k!e^\lambda}\\
                 &=\frac{1}{e^\lambda}\sum^\infty_{k=0}\frac{(\lambda e^r)^k}{k!}\\
                 &=\frac{1}{e^\lambda}\cdot e^{\lambda e^r}\\
                 &=\exp[\lambda(e^r-1)]
