@@ -106,15 +106,20 @@
             \text{Pr}\big\{\cup^\infty_{n=1}A_n\big\}=\lim_{m\rightarrow\infty}\text{Pr}\{\cup^m_{n=1}A_n\}=\lim_{m\rightarrow\infty}\text{Pr}\{A_m\}
         \end{equation*}
         (\ref{eq:9}) is proved.
-        \item Since $A_1\supseteq A_1\supseteq\dots$, according to De Morgan's euqalities, we can obtain that 
+        \item Since $A_1\supseteq A_2\supseteq\dots$, according to De Morgan's euqalities, we can obtain that 
         \begin{equation*}
-            \cap^\infty_{n=1}A_n=\cup^\infty_{n=1}A_n^c
+            \cap^\infty_{n=1}A_n=\big[\cup^\infty_{n=1}A_n^c\big]^c
         \end{equation*}
         where $A^c_n$ is the corresponding complementary set of $A_n$ and $A^c_1\subseteq A^c_2\subseteq\dots$ Then, in terms of \textcolor{red}{(\ref{eq:8})},
         \begin{equation*}
-            \text{Pr}\{\cap^\infty_nA_n\}=\text{Pr}\{\cup^\infty_nA^c_n\}=\lim_{m\rightarrow\infty}\text{Pr}\{\cup^m_nA^c_n\}=\lim_{m\rightarrow\infty}\text{Pr}\{A_m\}
+            \begin{aligned}
+                \text{Pr}\{\cap^\infty_nA_n\}&=\text{Pr}\{[\cup^\infty_nA^c_n]^c\}\\
+                &=\lim_{m\rightarrow\infty}\text{Pr}\{[\cup^m_{n=1}A_n^c]^c\}\\
+                &=\lim_{m\rightarrow\infty}\text{Pr}\{[A^c_m]^c\}\\
+                &=\lim_{m\rightarrow\infty}\text{Pr}\{A_m\}
+            \end{aligned}         
         \end{equation*}
-        since $\cup^m_nA^c_n=\cap^m_nA_n=A_n$. (10) is proved.
+        (10) is proved.
         \item To verify (\ref{eq:11}), from example 9 we can know that $B_1,B_n,\dots$ are disjoint and $\cup^m_{n=1}A_n=\cup^m_{n=1}B_n$. Accroding to \textcolor{red}{(\ref{eq:3})},
         \begin{equation*}
             \text{Pr}\{\cup^m_{n=1}A_n\}=\text{Pr}\{\cup^m_{n=1}B_n\}=\sum^m_{n=1}\text{Pr}\{B_n\}
@@ -299,7 +304,7 @@
                     &=\frac{1}{\sigma\sqrt{2\pi}}\int^\infty_{-\infty}e^{rx-(\frac{x-a}{\sqrt{2}\sigma})^2}dx\\
                     &=\frac{1}{\sqrt{\pi}}\int^{\infty}_{-\infty}e^{-(t^2-\sqrt{2}r\sigma t-ra)}dt,\quad\text{with $t=\frac{x-a}{\sqrt{2}\sigma}$}\\
                     &= \frac{e^{ra}}{\sqrt{\pi}}\int^\infty_{-\infty}e^{-(t^2-\sqrt{2}r\sigma t+\frac{r^2\sigma^2}{2})+\frac{r^2\sigma^2}{2}}dt\\
-                    &= \frac{e^{ra+\frac{r^2\sigma^2}{2}}}{\sqrt{\pi}}\int^\infty_{-\infty}e^{-(t-\frac{\sqrt{2}}{2}r\sigma)}dt\\
+                    &= \frac{e^{ra+\frac{r^2\sigma^2}{2}}}{\sqrt{\pi}}\int^\infty_{-\infty}e^{-(t-\frac{\sqrt{2}}{2}r\sigma)^2}dt\\
                     &=\frac{e^{ra+\frac{r^2\sigma^2}{2}}}{\sqrt{\pi}}\int^\infty_{-\infty}e^{-u^2}du,\quad\text{with $u=t-\frac{\sqrt{2}}{2}r\sigma$}\\
                     &= \frac{e^{ra+\frac{r^2\sigma^2}{2}}}{\sqrt{\pi}}\cdot\sqrt{\pi},\quad\text{use the fact before}\\
                     &=e^{ra+\frac{r^2\sigma^2}{2}}

@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{ctex}
+\input{../setup/packages}
+\input{../setup/format}
+
+\begin{document}
+    \title{Homework 5 of Stochastic Processes}
+    \author{姓名：林奇峰\qquad 学号：19110977}
+    \maketitle
+
+    \section{Exercise 4.2}
+    Show that every Markov chain with $\text{M}<\infty$ states contains at least one recurrent set of states. Explaining each of the following statements is suffcient.
+    \begin{enumerate}[(a)]
+        \item if state $i_1$ is transient, then there is some other state $i_2$ such that $i_1\rightarrow i_2$ and $i_2\nrightarrow i_1$.
+        \item if the $i_2$ of (a) is also transient, there is a third state $i_3$ such that $i_2\rightarrow i_3$, $i_3\nrightarrow i_2$; that state must satisfy $i_3\neq i_2,i_3\neq i_1$.
+        \item Continue iteratively to repeat (b) for successive states $i_3$ such that $i_1, i_2,\dots.$ That is, if $i_1,\dots,i_k$ are generated as above and are all transient, generate $i_{k+1}$ such that $i_k\rightarrow i_{k+1}$ and $i_{k+1}\nrightarrow i_k$. Then $i_{k+1}\neq i_j$ for $1\leq j\leq k$.
+        \item Show that for some $k\leq \text{M}$, $k$ is not transient, i.e., it is recurrent, so a recurrent exists. 
+    \end{enumerate}
+
+    \textbf{Solutions:}
+
+    \begin{enumerate}[(a)]
+        \item According to the \textbf{Definition 4.2.5}, if there is no such state $i_2$, $i_1$ is recurrent, which is a contradiction with the fact that $i_1$ is transient. Also, $i_2\neq i_1$ since otherwise $i_1\rightarrow i_2,i_2\rightarrow i_1$, which is recurrent.
+        \item Firstly, $i_2\rightarrow i_3,i_3\nrightarrow i_2$ and $i_3\neq i_2$ can be proved by (a). 
+        
+        Secondly, $i_1\rightarrow i_2, i_2\rightarrow i_3$ implies that $i_1\rightarrow i_3$. if $i_3\rightarrow i_1$,  it implies that $i_3\rightarrow i_1, i_1\rightarrow i_2$ and $i_3\rightarrow i_2$, which is a contradiction with the fact $i_3\nrightarrow i_2$. Thus, $i_3\nrightarrow i_1$ and $i_3\neq i_1$ since otherwise $i_1\rightarrow i_3,i_3\rightarrow i_1$, which is recurrent.
+        \item Firstly, the reason for which $i_{k+1}$ exists with $i_k\rightarrow i_{k+1}, i_{k+1}\nrightarrow i_k$ and $i_{k+1}\neq i_k$ can be proved by (a). 
+        
+        Secondly, for $1\leq j\leq k$, if $i_{k+1}=i_j$, it implies that $i_j\rightarrow i_{k+1}, i_{k+1}\rightarrow i_j, i_j\rightarrow i_k$ and $i_{k+1}\rightarrow i_k$, which is a contradiction with the fact $i_{k+1}\nrightarrow i_k$. Thus, $i_{k+1}\neq i_j$ for $1\leq j\leq k$.
+        \item If all states are transient, it means that $k=\text{M}$ and there exists a state $i_{\text{M}+1}$ with $i_{\text{M}+1}\neq i_j$ for $1\leq j\leq \text{M}$, which is a contradiction with the fact there exists only $\text{M}$ states. Therefore, there mus be some $k\leq\text{M}$, $i_k$ is not transient. Thus, a recurrent class exists.
+    \end{enumerate}
+
+    \section{Exercise 4.3}
+    Consider a finite-state Markov chain in which some given state, say state $1$, is accessible from every other state. Show that the chain has exactly one recurrent class $\mathcal{R}$ of states and state $1\in\mathcal{R}$. (Note that the chain is then a unichain.)
+
+    \textbf{Solutions:}
+    
+    Firstly, there is no state $i$ such that $1\rightarrow i$ and $i\nrightarrow 1$ since $1$ is accessible from every other states. Therefore, the state $1$ is recurrent.
+    
+    Secondly, for any given state $i$, if $1\nrightarrow i$, then $i$ must be transient since $i\rightarrow 1$; if $1\rightarrow i$, then $1\leftrightarrow i$ and $i$ must be in the same recurrent class as 1.
+
+    Thus, each state is either transient or in the same recurrent class as $1$.
+
+    \section{Exercise 4.8}
+    A transition probability matrix [P] is said to be doubly stochastic if 
+    \begin{equation*}
+        \sum_j P_{ij}=1\quad\text{for all }i ,\quad\sum_i P_{ij}=1\quad\text{for all j.}
+    \end{equation*}
+    \
+
+    That is, the row sum and the column sum each equal 1. If a doubly stochastic chain has $\text{M}$ states and is ergodic (i.e., has a single class of states and aperiodic), calculate its steady-state probabilities.
+
+    \textbf{Solutions:}
+    
+    TO-DO
+\end{document}
