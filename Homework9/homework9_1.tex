@@ -1,0 +1,174 @@
+\documentclass{article}
+\usepackage{ctex}
+\input{../setup/packages}
+\input{../setup/format}
+
+\begin{document}
+    \title{Homework 1 of Dynamic Programming and Optimal Control}
+    \author{姓名：林奇峰\qquad 学号：19110977}
+    \maketitle
+
+    \section{Exercise 1.1}
+    Consider the system
+    \begin{equation*}
+        x_{k+1}=x_k+u_k+w_k,\qquad k=0,1,2,3
+    \end{equation*}
+    
+    with initial state $x_0=5$, and the cost function
+    \begin{equation*}
+        \sum_{k=0}^3(x_k^2+u_k^2)
+    \end{equation*}
+    
+    Apply the DP algorithm for the following three cases:
+    \begin{enumerate}[(a)]
+        \item The control constraint set $U_k(x_k)$ is $\{u|0\leq x_k+u\leq5, u:\text{ integer}\}$ for all $x_k$ and $k$, and the disturbance $w_k$ is equal to zero for all $k$. 
+    \end{enumerate}
+    \begin{enumerate}[(c)]
+        \item The control constraint is as in part (a) and the disturbance $w_k$ takes the values -1 and 1 with equal probability 1/2 for all $x_k$ and $u_k$, except if $x_k+u_k$ is equal to 0 or 5,  in which case $w_k=0$ with probability 1.
+    \end{enumerate}
+    \textbf{Solutions:}
+    \begin{enumerate}[(a)]
+        \item 由题可知，$N=4$且$g_N(x_N)=0$。由于$w_k=0 \text{ for all }k$, $x_{k+1}=x_k+u_k+w_k=x_k+u_k$，且
+            \begin{equation}
+                \begin{split}
+                    &\min_{u_k\in U_k(x_k)}\mathop{E}_{w_k}\big\{g_k(x_k,u_k,w_k)+J_{k+1}(f_k(x_k, u_k, w_k))\big\}\\
+                    =&\min_{u_k\in U_k(x_k)}g_k(x_k,u_k)+J_{k+1}(f_k(x_k, u_k))\\
+                    =&\min_{u_k\in U_k(x_k)}g_k(x_k,u_k)+J_{k+1}(x_k+u_k)\\
+                \end{split}
+            \end{equation}
+        
+            另外，代价函数$\sum_{k=0}^3(x_k^2+u_k^2)=\sum_{k=0}^3g_k(x_k,u_k)$可以明显地通过最小化每个子问题$g_k(x_k,u_k)$来最小化本身，符合动态规划的使用场景。因此我们使用动态规划的方法来解决本问题。    
+
+            从约束$\{u|0\leq x_k+u_k\leq 5, u:\text{ integer}\}$中我们可以得到$u$的取值集合为$U_k(x_k)=\{-x_k, 1-x_k, 2-x_k, 3-x_k, 4-x_k, 5-x_k\}$。
+        
+            则，当$N=4$时
+            \begin{equation}
+                J_4(x_4)=g_4(x_4)=0
+            \end{equation}
+
+        
+            当$k=3$时，
+            \begin{equation}
+                \begin{split}
+                    J_3(x_3)&=\min_{u_3\in U_3(x_3)}g_3(x_3,u_3)+J_4(x_3+u_3)\\
+                    &=\min_{u_3\in U_3(x_3)}x_3^2+u_3^2
+                \end{split}
+            \end{equation}
+            令$h_3(u_3)=x_3^2+u_3^2$,并对其求导可得
+            \begin{equation}
+                \begin{split}
+                    h_3(u_3)'=2u_3
+                \end{split}
+            \end{equation}
+            由于存在约束$\{u|0\leq x_3+u_3\leq 5, u:\text{ integer}\}$，我们要分情况讨论。
+            \begin{enumerate}
+                \item 当$x_3<0$时，$u_3>0$且$h_3(u^3)'=2u_3>0$。因此$u_3$的取值越小越好，即$u_3^*=-x_3$。
+                \item 当$x_3>5$时，$u_3<0$且$h_3(u^3)'=2u_3<0$。因此$u_3$的值越大越好，即$u_3^*=5-x_3$。
+                \item 当$0\leq x_3\leq 5$时，最小值为$h_3^*(u_3)=0$且$u_3^*=0$。
+            \end{enumerate}
+            将上述结果代回去可以得到
+            \begin{equation}
+                J_3(x_3)=
+                \begin{cases}
+                    x_3^2+u_3^2 & ,x_3\leq 0\\
+                    x_3^2 & ,0\leq x_3\leq 5\\
+                    2x_3^2-10x_3+25 & ,x_3>5
+                \end{cases}
+            \end{equation}
+
+            当$k=2$时，$0\leq x_3=x_2+u_2\leq 5$，因此
+            \begin{equation}
+                \begin{split}
+                    J_2(x_2) &=\min_{u_2\in U(x_2)}g_2(x_2,u_2)+J_3(x_2+u_2)\\
+                    &=\min_{u_2\in U(x_2)}x_2^2+u_2^2+(x_2+u_2)^2
+                \end{split}
+            \end{equation}
+            令$h_2(u_2)=x_2^2+u_2^2+(x_2+u_2)^2$，并对其求导可得
+            \begin{equation}
+                h_2(u_2)'=4u_2+2x_2=4(x_2+u_2)-2x_2
+            \end{equation}
+            由于存在约束$\{u|0\leq x_2+u_2\leq 5, u:\text{ integer}\}$，我们要分情况讨论。
+            \begin{enumerate}
+                \item 当$x_2>10$时，$h_2(u_2)'<0$，因此$u_2$的值越大越好，即$u_2^*=5-x_2$
+                \item 当$x_2<0$时，$h_2(u_2)'>0$，因此$u_2$的取值越小越好，即$u_2^*=-x_2$
+                \item 当$0\leq x_2\leq 10$时，最小值出现在$h'=0$的时候
+                    \begin{enumerate}
+                        \item 当$x_2$为偶数的时候，$u_2^*=-\frac{x_2}{2}$
+                        \item 当$x_3$为奇数的时候，$u_2^*=-\frac{x_2+1}{2}$或者$u_2^*=-\frac{x_2-1}{2}$，因为$h$是偶函数。
+                    \end{enumerate}
+            \end{enumerate}
+            将上述结果代回去可以得到
+            \begin{equation}
+                J_2(x_2)=
+                \begin{cases}
+                    2x_2^2 & ,x_2<0\\
+                    \frac{3}{2}x_2^2+\frac{1}{2}\cdot\bm{1}_{x_2\text{ is odd} } &, 0\leq x_2\leq 10\\
+                    2x_2^2-10x_2+50 &,x>10
+                \end{cases}
+            \end{equation}
+
+            当$k=1$时，$0\leq x_2=x_1+u_1\leq 5$，因此
+            \begin{equation}
+                \begin{split}
+                    J_1(x_1) &=\min_{u_1\in U(x_1)}g_1(x_1,u_1)+J_2(x_1+u_1)\\
+                    &=\min_{u_1\in U(x_1)}x_1^2+u_1^2+\frac{3}{2}(x_1+u_2)^2+\frac{1}{2}\cdot\bm{1}_{x_1+u_1\text{ is odd}}
+                \end{split}
+            \end{equation}
+            令$h_1(u_1)=x_1^2+u_1^2+\frac{3}{2}(x_1+u_2)^2+\frac{1}{2}\cdot\bm{1}_{x_1+u_1\text{ is odd}}$，并对其求导可得
+            \begin{equation}
+                h_1(u_1)'=5u_1+3x_1=5(x_1+u_1)-2x_1
+            \end{equation}
+            由于存在约束$\{u|0\leq x_1+u_1\leq 5, u:\text{ integer}\}$，且$h_1'$有点难以直接求解。因此，直接列出可能的取值以求解。
+            \begin{equation}
+                \begin{aligned}
+                    h_1(-x_1) &= 2x^2_1\\
+                    h_1(1-x_1) &= 2x^2_1-2x_1+3\\
+                    h_1(2-x_1) &= 2x^2_1-4x_1+10\\
+                    h_1(3-x_1) &= 2x^2_1-6x_1+23\\
+                    h_1(4-x_1) &= 2x^2_1-8x_1+40\\
+                    h_1(5-x_1) &= 2x^2_1-10x_1+63
+                \end{aligned}
+            \end{equation}
+            对上述式子联立求区间可得最终结果
+            \begin{equation}
+                J_1(x_1)=
+                \begin{cases}
+                    2x^2_1 &, u_1^*=-x_1\text{ and } x_1\leq\frac{3}{2}\\
+                    2x^2_1-2x_1+3 &, u_1^*=1-x_1\text{ and } \frac{3}{2}<x_1\leq\frac{7}{2}\\
+                    2x^2_1-4x_1+10 &, u_1^*=2-x_1\text{ and } \frac{7}{2}<x_1\leq\frac{13}{2}\\
+                    2x^2_1-6x_1+23 &, u_1^*=3-x_1\text{ and } \frac{13}{2}<x_1\leq\frac{17}{2}\\
+                    2x^2_1-8x_1+40 &, u_1^*=4-x_1\text{ and } \frac{17}{2}<x_1\leq\frac{23}{2} \\
+                    2x^2_1-10x_1+63 &, u_1^*=5-x_1\text{ and } x_1>\frac{23}{2}
+                \end{cases}
+            \end{equation}
+
+            当$k=0$时，$0\leq x_1=x_0+u_0\leq 5$且$x_0=5,-5\leq u_0\leq 0$，因此
+            \begin{equation}
+                \begin{split}
+                    J_0(x_0) &=\min_{u_0\in U_{(x_0)}}g_0(x_0,u_0)+J_1(x_0+u_0)\\
+                    &=25+u_0^2+J_1(5+u_0)
+                \end{split}
+            \end{equation}
+            同样，令$h_0(u_0)=25+u_0^2+J_1(5+u_0)$，并对$u_0$进行取值可得
+            \begin{equation}
+                \begin{aligned}
+                    h_0(-5)&=50\\
+                    h_0(-4)&=43\\
+                    h_0(-3)&=41\\
+                    h_0(-2)&=44\\
+                    h_0(-1)&=52\\
+                    h_0(0)&=65
+                \end{aligned}
+            \end{equation}
+            则$u^*_0=-3$且$J_0(x_0)=41$。
+    \end{enumerate}
+   
+
+    \section{Exercise 2.4 (Dijkstra's Algorithm for Shortest Paths)}
+    Consider the best-first version of the label correcting algorithm of Section 2.3.1. Here at each iteration we remove from OPEN a node that has minimum label over all nodes in OPEN.
+    \begin{enumerate}[(a)]
+        \item Show that each node $j$ will enter OPEN at most once, and show that at the time it exits OPEN, its label $d_j$ is equal to the shortest distance from $s$ to $j$. \textit{Hint:} Use the nonnegative arc length assumption to argue that in the label correcting algorithm, in order for the node $i$ that exist OPEN to reenter, there must exist another node $k$ in OPEN with $d_k+a_{ki}<d_i$.
+        \item Show that the number of arithmetic operations required for termination is bounded by $cN^2$ where $N$ is the number of nodes and $c$ is some constant.
+    \end{enumerate}
+    \textbf{Solutions:}
+\end{document}
