@@ -162,6 +162,137 @@
             \end{equation}
             则$u^*_0=-3$且$J_0(x_0)=41$。
     \end{enumerate}
+
+    \begin{enumerate}[(c)]
+        \item 由题可知，此时$w_k$不总是为0。因此，
+        \begin{equation}
+            \begin{split}
+                &\min_{u_k\in U_k(x_k)}\mathop{E}_{w_k}\big\{g_k(x_k,u_k,w_k)+J_{k+1}(f_k(x_k, u_k, w_k))\big\}\\
+                =&\min_{u_k\in U_k(x_k)}g_k(x_k,u_k)+\mathop{E}_{w_k}\big\{J_{k+1}(f_k(x_k, u_k, w_k))\big\}\\
+                =&\min_{u_k\in U_k(x_k)}g_k(x_k,u_k)+\mathop{E}_{w_k}\big\{J_{k+1}(x_k+u_k+w_k)\big\}\\
+            \end{split}
+        \end{equation}
+        
+        当$k=4$时，
+        \begin{equation}
+            J_4(x_4)=g_4(x_4)=0
+        \end{equation}
+
+        当$k=3$时，
+        \begin{equation}
+            \begin{split}
+                J_3(x_3)&=\min_{u_3\in U_3(x_3)}g_3(x_3,u_3)+\mathop{E}_{w_3}\big\{J_4(x_3+u_3+w_3)\big\}\\
+                &=\min_{u_3\in U_3(x_3)}x_3^2+u_3^2
+            \end{split}
+        \end{equation}
+        令$h_3(u_3)=x_3^2+u_3^2$，列出所有的$u_3$取值可得
+        \begin{equation}
+            \begin{aligned}
+                h_3(-x_3)&=2x_3^2\\
+                h_3(1-x_3)&=2x_3^2-2x_3+1\\
+                h_3(2-x_3)&=2x_3^2-4x_3+4\\
+                h_3(3-x_3)&=2x_3^2-6x_3+9\\
+                h_3(4-x_3)&=2x_3^2-8x_3+16\\
+                h_3(5-x_3)&=2x_3^2-10x_3+25\\
+            \end{aligned}
+        \end{equation}
+        则可得最后的结果
+        \begin{equation}
+            J_3(x_3)=
+            \begin{cases}
+                2x_3 &, u_1^*=-x_3\text{ and } x_3\leq\frac{1}{2}\\
+                2x_3^2-2x_3+1 &,u_1^*=1-x_3\text{ and } \frac{1}{2}<x_3\leq\frac{3}{2}\\
+                2x_3^2-4x_3+4 &,u_1^*=2-x_3\text{ and } \frac{3}{2}<x_3\leq\frac{5}{2}\\
+                2x_3^2-6x_3+9 &,u_1^*=3-x_3\text{ and } 、\frac{5}{2}<x_3\leq\frac{7}{2}\\
+                2x_3^2-8x_3+16 &,u_1^*=4-x_3\text{ and } \frac{7}{2}<x_3\leq\frac{9}{2}\\
+                2x_3^2-10x_3+25 &,u_1^*=5-x_3\text{ and } x_3>\frac{9}{2}\\
+            \end{cases}
+        \end{equation}
+
+        当$k=2$时
+        \begin{equation}
+            \begin{split}
+                J_2(x_2)&=\min_{u_2\in U_2(x_2)}g_2(x_2,u_2)+\mathop{E}_{w_2}\big\{J_3(x_2+u_2+w_2)\big\}\\
+                &=\min_{u_2\in U_2(x_2)}x_2^2+u_2^2+\mathop{E}_{w_2}\big\{J_3(x_2+u_2+w_2)\big\}
+            \end{split}
+        \end{equation}
+        令$h_2(u_2)=x_2^2+u_2^2+\mathop{E}_{w_2}\big\{J_3(x_2+u_2+w_2)\big\}$，并列出所有的$u_2$的取值，可得
+        \begin{equation}
+            \begin{aligned}
+                h_2(-x_2)&=x_2^2+(-x_2)^2+1\cdot J_3(0)&&=2x_2^2\\
+                h_2(1-x_2)&=x_2^2+(1-x_2)^2+\frac{1}{2}\cdot J_3(0)+\frac{1}{2}\cdot J_3(2)&&=2x_2^2-2x_2+3\\
+                h_2(2-x_2)&=x_2^2+(2-x_2)^2+\frac{1}{2}\cdot J_3(1)+\frac{1}{2}\cdot J_3(3)&&=2x_2^2-4x_2+9\\
+                h_2(3-x_2)&=x_2^2+(3-x_2)^2+\frac{1}{2}\cdot J_3(2)+\frac{1}{2}\cdot J_3(4)&&=2x_2^2-6x_2+19\\
+                h_2(4-x_2)&=x_2^2+(4-x_2)^2+\frac{1}{2}\cdot J_3(3)+\frac{1}{2}\cdot J_3(5)&&=2x_2^2-8x_2+33\\
+                h_2(5-x_2)&=x_2^2+(5-x_2)^2+1\cdot J_3(5)&&=2x_2^2-10x_2+50\\
+            \end{aligned}
+        \end{equation}
+        则可得最后的结果
+        \begin{equation}
+            J_2(x_2)=
+            \begin{cases}
+                2x_2^2 &, u_2^*=-x_2\text{ and }x_2\leq\frac{3}{2}\\
+                2x_2^2-2x_2+3 &, u_2^*=1-x_2\text{ and }\frac{3}{2}<x_2\leq 3\\
+                2x_2^2-4x_2+9 &, u_2^*=2-x_2\text{ and }3<x_2\leq 5\\
+                2x_2^2-6x_2+19 &, u_2^*=3-x_2\text{ and }5<x_2\leq 7\\
+                2x_2^2-8x_2+33 &, u_2^*=4-x_2\text{ and }7<x_2\leq\frac{17}{2}\\
+                2x_2^2-10x_2+50 &,u_2^*=5-x_2\text{ and }x_2>\frac{17}{2}
+            \end{cases}
+        \end{equation}
+
+        当$k=1$时，
+        \begin{equation}
+            \begin{split}
+                J_1(x_1)&=\min_{u_1\in U_1(x_1)}g_1(x_1,u_1)+\mathop{E}_{w_1}\big\{J_2(x_1+u_1+w_1)\big\}\\
+                &=\min_{u_1\in U_1(x_1)}x_1^2+u_1^2+\mathop{E}_{w_1}\big\{J_2(x_1+u_1+w_1)\big\}
+            \end{split}
+        \end{equation}
+        令$h_1(u_1)=x_1^2+u_1^2+\mathop{E}_{w_1}\big\{J_2(x_1+u_1+w_1)\big\}$，并列出所有的$u_2$的取值，可得
+        \begin{equation}
+            \begin{aligned}
+                h_1(-x_1)&=x_1^2+(-x_1)^2+1\cdot J_2(0)&&=2x_1^2\\
+                h_1(1-x_1)&=x_1^2+(1-x_1)^2+\frac{1}{2}\cdot J_2(0)+\frac{1}{2}\cdot J_2(2)&&=2x_2^2-2x_2+\frac{9}{2}\\
+                h_1(2-x_1)&=x_1^2+(2-x_1)^2+\frac{1}{2}\cdot J_2(1)+\frac{1}{2}\cdot J_2(3)&&=2x_2^2-4x_2+\frac{25}{2}\\
+                h_1(3-x_1)&=x_1^2+(3-x_1)^2+\frac{1}{2}\cdot J_2(2)+\frac{1}{2}\cdot J_2(4)&&=2x_2^2-6x_2+25\\
+                h_1(4-x_1)&=x_1^2+(4-x_1)^2+\frac{1}{2}\cdot J_2(3)+\frac{1}{2}\cdot J_2(5)&&=2x_2^2-8x_2+43\\
+                h_1(5-x_1)&=x_1^2+(5-x_1)^2+1\cdot J_2(5)&&=2x_2^2-10x_2+64\\
+            \end{aligned}
+        \end{equation}
+        则可得最后的结果
+        \begin{equation}
+            J_1(x_1)=
+            \begin{cases}
+                2x_1^2 &, u_1^*=-x_1\text{ and }x_1\leq\frac{9}{4}\\
+                2x_2^2-2x_2+\frac{9}{2} &, u_1^*=1-x_1\text{ and }\frac{9}{4}<x_1\leq 4\\
+                2x_2^2-4x_2+\frac{25}{2} &, u_1^*=2-x_1\text{ and }4<x_1\leq\frac{25}{4}\\
+                2x_2^2-6x_2+25 &, u_1^*=3-x_1\text{ and }\frac{25}{4}<x_1\leq 9\\
+                2x_2^2-8x_2+43 &, u_1^*=4-x_1\text{ and }9<x_1\leq\frac{21}{2}\\
+                2x_2^2-10x_2+64 &, u_1^*=5-x_1\text{ and }x_1>\frac{21}{2}
+            \end{cases}
+        \end{equation}
+
+        当$k=0$时，$x_0=5$，则
+        \begin{equation}
+            \begin{split}
+                J_0(x_0)&=\min_{u_0\in U_0(x_0)}g_1(x_0,u_0)+\mathop{E}_{w_0}\big\{J_1(x_0+u_0+w_0)\big\}\\
+                &=\min_{u_0\in U_0(x_0)}x_0^2+u_0^2+\mathop{E}_{w_0}\big\{J_1(x_0+u_0+w_0)\big\}\\
+                &=\min_{u_0\in U_0(x_0)}25+u_0^2+\mathop{E}_{w_0}\big\{J_1(5+u_0+w_0)\big\}
+            \end{split}
+        \end{equation}
+        令$h_0(u_0)=25+u_0^2+\mathop{E}_{w_0}\big\{J_1(5+u_0+w_0)\big\}$，并列出所有的取值可得
+        \begin{equation}
+            \begin{aligned}
+                h_0(-5)&=25+25+1\cdot J_1(0)&&=50\\
+                h_0(-4)&=25+16+\frac{1}{2}\cdot J_1(0)+\frac{1}{2}\cdot J_1(2)&&=45\\
+                h_0(-3)&=25+9+\frac{1}{2}\cdot J_1(1)+\frac{1}{2}\cdot J_1(3)&&=43\frac{1}{4}\\
+                h_0(-2)&=25+4+\frac{1}{2}\cdot J_1(2)+\frac{1}{2}\cdot J_1(4)&&=47\frac{1}{4}\\
+                h_0(-1)&=25+1+\frac{1}{2}\cdot J_1(3)+\frac{1}{2}\cdot J_1(5)&&=54\frac{1}{2}\\
+                h_0(0)&=25+0+1\cdot J_1(5)=67\frac{1}{2}
+            \end{aligned}
+        \end{equation}
+        则$u_0^*=-3$且$J_0(x_0)=43\frac{1}{4}$
+
+    \end{enumerate}
    
 
     \section{Exercise 2.4 (Dijkstra's Algorithm for Shortest Paths)}
@@ -171,4 +302,10 @@
         \item Show that the number of arithmetic operations required for termination is bounded by $cN^2$ where $N$ is the number of nodes and $c$ is some constant.
     \end{enumerate}
     \textbf{Solutions:}
+    
+    \begin{enumerate}[(a)]
+        \item If there exists a node $i$ that exits OPEN to reenter, then there must exist another node $k$ in OPEN with $d_k+a_{ki}<d_i$. Since $k$ is directly connected to $i$, the algorithm should choose $d_k+a_{ki}$ as the value of $d_i$ but not other values, which is contradictory to the current value of $d_i$.
+        \item For 1th node, it requires at most $N-1$ operations to compute the distance. For 2th node, it requires at most $N-2$ operations to compute the distance. Similarly, for $N-1$th node, it requires at most 1 operations to compute the distance. Therefore, to compute distance, it required at most $1+2+\cdots+(N-1)=\frac{N(N-1)}{2}$ operations. Since it also need to update and store, the value of each label, we can rewrite it as $cN^2$.
+        
+    \end{enumerate}
 \end{document}

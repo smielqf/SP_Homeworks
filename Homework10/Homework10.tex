@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{ctex}
+\input{../setup/packages}
+\input{../setup/format}
+
+\begin{document}
+    \title{Homework 1 of Dynamic Programming and Optimal Control}
+    \author{姓名：林奇峰\qquad 学号：19110977}
+    \maketitle
+
+    
+    \section{Exercise 5.19}
+    Let $J=\min\{n|S_n\leq b\text{ or } S_n\geq a\}$, where $a$ is a positive integer, $b$ is a negative integer, and $S_n=X_1+X_2+\cdots+X_n$. Assume that $\{X_i;i\geq 1\}$ is a set of zero-mean IID rv s that can take only the set of values $\{-1,0,+1\}$, each with positive probability.
+    \begin{enumerate}[(a)]
+        \item Is $J$ a stopping rule? Why or why not? Hint: The more difficult part of this is to argue that $J$  si a rv (i.e., non-defective); you do not need to construct a proof of this, but try to argue why it must be true.
+        \item What are the possibile values of $S_J$?
+        \item Find an expression for $\text{E}[S_J]$ in terms of $p$, $a$, and $b$, where $p=\text{Pr}\{S_J\geq a\}$.
+        \item Find an expression for $\text{E}[S_J]$ from Wald's equality. Use this to solve for $p$.
+    \end{enumerate}
+
+    \textbf{Solutions:}
+    \begin{enumerate}[(a)]
+        \item 首先$S_n\leq b$和$S_n\geq a$是$X_1,\dots,X_n$的函数，且对于任意的$n\geq 1$，$\mathbb{I}_{J=n}$是关于$X_1,\dots,X_n$的函数，其次证明$J$停止规则，即证明$\lim_{n\rightarrow\infty}\text{Pr}\{J\leq n\}=1$。根据中心极限定理，$\frac{S_n-n\overline{X}}{\sqrt{n}\sigma}$会逐渐逼近正态分布。由于$\overline{X}=0$，所以$\frac{S_n}{\sqrt{n}\sigma}$会逐渐逼近正态分布。$\frac{a}{\sqrt{n}\sigma}$和$\frac{b}{\sqrt{n}\sigma}$趋于0当$n\rightarrow\infty$。因此$\{b<S_n<a\}$的概率趋于0，即$\lim_{n\rightarrow\infty}\text{Pr}\{J\leq n\}=1$。
+        \item 由于$X_i$的值域为$\{-1,0,+1\}$，且$a$为正整数，$b$为负整数，$a\geq 1$且$b\leq -1$。$S_J=X_1+\cdots+X_J$只能先到达$a$和$b$中的一个。因此，$S_J$的可能取值为$a$或者$b$。
+        \item 当$S_J$出现的时候，其只有两种可能值$S_J\geq a$或者$S_J\leq b$。因此$\text{Pr}\{S_J\leq b\}$=1-p，则
+        \begin{equation*}
+            \text{E}[S_J]=p\cdot a+(1-p)\cdot b
+        \end{equation*}
+        \item 根据Wald's equality，当$E[J]<\infty$时，
+        \begin{equation*}
+            E[S_J]=\overline{X}E[J]=0\Rightarrow 0=p\cdot a+(1-p)\cdot b\Rightarrow p=\frac{b}{b-a}
+        \end{equation*}
+    \end{enumerate}
+
+    \section{Exercise 5.22}
+    A company has three promising approaches to the design of a new wireless application. Unknown to the company, the first approach requires two weeks, the second, four weeks, and the third eight weeks, but only the first will be successful. The company hires one programmer after another for the design, stopping when a design is successful. Let $X_i$ be the time taken by the $i$th programmer, assuming that each programmer independently chooses an approach with equal probability (i.e.., $p_{X_i}(x)=1/3$ for $x=2,4$ and 8). Let $J$ be the number of the first programmer who is successful and let $T=\sum_{i=1}^JX_i$ be the time of the first success.
+    \begin{enumerate}[(a)]
+        \item Use Wald's equality to find $\text{E}[T]$.
+        \item Compute $\text{E}[\sum_{i=1}^JX_i|J=n]$ and show that it is not equal to $\text{E}[\sum_{i=1}^nX_i]$.
+        \item Use (b) for a second derivation of $\text{E}[T]$.
+        \item Find $\text{E}[T]$ if the company tells successive programmers which approaches have been tried unsuccessfully earlier.
+    \end{enumerate}
+
+    \textbf{Solutions:}
+    \begin{enumerate}[(a)]
+        \item 由题意可以知道
+            \begin{equation*}
+                \begin{aligned}
+                    \text{Pr}\{J=1\}&=\frac{1}{3}\\
+                    \text{Pr}\{J=2\}&=\frac{2}{3}\cdot\frac{1}{3}\\
+                    \text{Pr}\{J=3\}&=\frac{2}{3}\cdot\frac{2}{3}\cdot\frac{1}{3}\\
+                    \vdots\\
+                    \text{Pr}\{J=n\}&=\bigg(\frac{2}{3}\bigg)^{n-1}\cdot\frac{1}{3}
+                \end{aligned}              
+            \end{equation*}
+
+            根据几何分布可以知道$\text{E}[J]=\frac{1}{p}=3$。
+            
+            $\overline{X}=\frac{1}{3}\times[2+4+8]=\frac{14}{3}$
+
+            根据Wald's equality
+            \begin{equation*}
+                \text{E}[T]=\overline{X}\text{E}[J]=\frac{14}{3}\cdot 3=14
+            \end{equation*}
+
+        \item 
+            当给定$n$时，可知序列长度，这时候$\text{E}[\sum_{i=1}^JX_i|J=n]$就相当于各个序列出现的概率乘上该序列的和。
+
+            每个序列的前$n-1$个取值有$\frac{1}{2}$的概率取$\{4,8\}$，因此一共有$2^{n-1}$个序列，且出现的概率均为$(\frac{1}{2})^{n-1}$。因此我们可以直接去计算各个序列加起来的$4$的个数和$8$的加数。4和8加起来的个数一共有$(n-1)\cdot 2^{n-1}$，又因为$4$和$8$的个数相等，所以它们的个数均为$(n-1)\cdot 2^{n-1}\cdot\frac{1}{2}$。
+
+            因此，$\text{E}[\sum_{i=1}^JX_i|J=n]$可以写成
+
+            \begin{equation*}
+                \begin{split}
+                    \text{E}\bigg[\sum_{i=1}^JX_i|J=n\bigg] &= 2+\bigg(\frac{1}{2}\bigg)^{n-1}\cdot[(n-1)\cdot2^{n-1}\cdot\frac{1}{2}\cdot4+(n-1)\cdot2^{n-1}\cdot\frac{1}{2}\cdot8]\\
+                    &=2+[(n-1)\cdot2+(n-1)\cdot4]\\
+                    &=6n-4
+                \end{split}
+            \end{equation*}
+            
+            考虑$\text{E}[\sum_{i=1}^nX_i]$
+            \begin{equation*}
+                \begin{aligned}
+                    \sum_{i=1}^1X_i&=\begin{cases}
+                        2,\quad\frac{1}{3}
+                    \end{cases}\\
+                    \sum_{i=1}^2X_i&=\begin{cases}
+                        4+2,\quad\frac{1}{3}\cdot\frac{1}{3}\\
+                        8+2,\quad\frac{1}{3}\cdot\frac{1}{3}\\
+                    \end{cases}\\
+                    \sum_{i=1}^3X_i&=\begin{cases}
+                        4+4+2,\quad\frac{1}{3}\cdot\frac{1}{3}\cdot\frac{1}{3}\\
+                        4+8+2,\quad\frac{1}{3}\cdot\frac{1}{3}\cdot\frac{1}{3}\\
+                        8+4+2,\quad\frac{1}{3}\cdot\frac{1}{3}\cdot\frac{1}{3}\\
+                        8+8+2,\quad\frac{1}{3}\cdot\frac{1}{3}\cdot\frac{1}{3}
+                    \end{cases}\\
+                    \vdots\\
+                \end{aligned}
+            \end{equation*} 
+
+            可以观察到
+            
+
+            \begin{equation*}
+                \text{E}\bigg[\sum_{i=1}^nX_i\bigg] =\lim_{n\rightarrow\infty}\sum_{i=1}^n\bigg(\frac{1}{3}\bigg)^i(4\cdot2^{i-1}+8\cdot2^{i-1}+2^i)
+            \end{equation*}
+        \item 
+            \begin{equation*}
+                \begin{split}
+                    \text{E}\bigg[\sum_{i=1}^nX_i\bigg] &=\lim_{n\rightarrow\infty}\sum_{i=1}^n\bigg(\frac{1}{3}\bigg)^i(4\cdot2^{i-1}+8\cdot2^{i-1}+2^i)\\
+                    &=\lim_{n\rightarrow\infty}\sum_{i=1}^n\bigg(\frac{1}{3}\bigg)^{i-1}\cdot2^{i-1}\cdot\frac{1}{3}\cdot(4+8+2)\\
+                    &=\frac{14}{3}\lim_{n\rightarrow\infty}\sum_{i=0}^n\bigg(\frac{2}{3}\bigg)^{i}\\
+                    &=\frac{14}{3}\cdot3\\
+                    &=14
+                \end{split}
+            \end{equation*}
+        \item
+            \begin{equation*}
+                \begin{split}
+                    \text{E}[T]&=\frac{1}{3}\cdot2+\frac{1}{3}\cdot\frac{1}{2}\cdot(4+2)+\frac{1}{3}\cdot\frac{1}{2}\cdot(8+2)+\frac{1}{3}\cdot\frac{1}{2}\cdot(4+8+2)+\frac{1}{3}\cdot\frac{1}{2}\cdot(8+4+2)\\
+                    &=8
+                \end{split}
+            \end{equation*}
+    \end{enumerate}  
+\end{document}
