@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{ctex}
+\input{../setup/packages}
+\input{../setup/format}
+
+\begin{document}
+    \title{Homework 3 of Dynamic Programming and Optimal Control}
+    \author{姓名：林奇峰\qquad 学号：19110977}
+    \maketitle
+
+    \section{5.2}
+    Consider the scalar system
+        \begin{equation*}
+            \begin{aligned}
+                x_{k+1}&=x_k+u_k+w_k\\
+                z_k &= x_k +v_k,
+            \end{aligned}
+        \end{equation*}
+   3 $x_0$, and the disturbances $w_k$ and $v_k$ are all independent. Let the cost be 
+    \begin{equation*}
+        E\bigg\{x^2_N+\sum_{k=0}^{N-1}(x_k^2+u_k^2)\bigg\},
+    \end{equation*}
+    and let the given probability distributions be
+    \begin{equation*}
+        \begin{aligned}
+            p(x_0=2)=\frac{1}{2},&&p(w_k=1)=\frac{1}{2}, &&p(v_k=\frac{1}{4})=\frac{1}{2}\\
+            p(x_0=-2)=\frac{1}{2},&&p(w_k=-1)=\frac{1}{2}, &&p(v_k=-\frac{1}{4})=\frac{1}{2}
+        \end{aligned}
+    \end{equation*}
+    \begin{enumerate}[(a)]
+        \item Determine the optimal policy. \textit{Hint}: For this problem, $E\{x_k|I_k\}$ can be determined from $E\{x_{k-1}|I_{k-1}\},u_{k-1}$ and $z_k$.
+    \end{enumerate}
+    \textbf{Solution:}
+
+    Since
+    \begin{equation*}
+        \begin{aligned}
+            A_k = 1, && B_k=1, && C_k=1, &&Q_k=1, && R_k=1
+        \end{aligned}
+    \end{equation*}
+    
+    we have
+    \begin{equation*}
+        \begin{aligned}
+            &\begin{split}
+                L_k &=-(R_k+B_k'K_{K+1}B_k)^{-1}B_k'K_{k+1}A_k\\
+                    &=-\frac{1+K_{k+1}}{K_{k+1}}
+            \end{split}
+            \\
+            & \begin{split}
+                P_k&=A_k'K_{k+1}B_k(R_k+B_k'K_{k+1}B_k)^{-1}B_k'K_{k+1}A_k\\
+                &=\frac{K_{k+1}^2}{1+K_{k+1}}
+            \end{split}\\
+            &\begin{split}
+                K_k&=K_{k+1}-P_k+1\\
+                &=\frac{1+2K_{k+1}}{1+K_{k+1}}
+            \end{split}
+        \end{aligned}
+    \end{equation*}
+
+    According to optimal control law:
+    \begin{equation*}
+        \mu_k^*(I_k)=L_kE\{x_k|I_k\}
+    \end{equation*}
+
+    For this problem, $E\{x_k|I_k\}$ can be determined from $E\{x_{k-1}|I_{k-1}\},u_{k-1}$ and $z_k$. 
+
+    First,
+    \begin{equation*}
+        \begin{aligned}
+            &z_k = x_k+v_k=x_{k-1}+u_{k-1}+w_{k-1}+v_k\\
+            &\Downarrow\\
+            &z_k-x_{k-1}-u_{k-1}=w_{k-1}+v_k
+        \end{aligned}
+    \end{equation*}
+
+    The value of $w_{k-1}+v_k$ can be only one of $\{\frac{3}{4},\frac{5}{4},-\frac{3}{4},-\frac{5}{4}\}$. If $z_k-x_{k-1}-u_{k-1}=\frac{3}{4}\text{ or }\frac{5}{4}$, then $w_k=1$ and $x_k=x_{k-1}+u_{k-1}+1$ can be known. It is the same as $z_k-x_{k-1}-u_{k-1}=-\frac{3}{4}\text{ or }-\frac{5}{4}$. Thus
+    \begin{equation*}
+        E\{x_0|I_0\}=\begin{cases}
+            2, & \text{if } z_0=2\pm\frac{1}{4}\\
+            -2, & \text{if }  z_0=-2\pm\frac{1}{4}
+        \end{cases}
+    \end{equation*}
+    \begin{equation*}
+        E\{x_k|I_k\} = \begin{cases}
+            E\{x_{k-1}|I_{k-1}\}+u_{k-1}+1, & \text{if } z_{k}-E\{x_{k-1}|I_{k-1}\}-u_{k-1}=1\pm\frac{1}{4}\\
+            E\{x_{k-1}|I_{k-1}\}+u_{k-1}-1, & \text{if } z_{k}-E\{x_{k-1}|I_{k-1}\}-u_{k-1}=-1\pm\frac{1}{4}\\
+        \end{cases}
+    \end{equation*}
+
+    Now, we can obtain $L_k$ and $E\{x_k|I_k\}$ and calculate the optimal policy $u_k^*=L_kE\{x_k|I_k\}$.
+\end{document}

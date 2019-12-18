@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{ctex}
+\input{../setup/packages}
+\input{../setup/format}
+
+\begin{document}
+    \title{Homework 2 of Dynamic Programming and Optimal Control}
+    \author{姓名：林奇峰\qquad 学号：19110977}
+    \maketitle
+
+    \section{Exercise 9.6}
+    Define $\gamma(r)$ as $\ln[\text{g}(r)]$ where $\text{g}(r)=\text{E}[\exp(rX)]$. Assume that $X$ is discrete with possible outcomes $\{a_i;i\geq1\}$, let $p_i$ denote $\text{Pr}\{X=a_i\}$, and assume that $\text{g}(r)$ exists in some open interval $(r_\_,r_+)$ containing $r=0$. For any given $r,r_\_<r<r_+$, define a rv $X_r$ with the same set of possible outcomes $\{a_i;i\geq1\}$ as $X$, but with a PMF $q_i=\text{Pr}\{X_r=a_i\}=p_i\exp[a_ir-\gamma(r)]$. Note that $X_r$ is not a function of $X$ and is not even to be viewed as in the same probability space as $X$; it is of interest simply because of the behavior of its defined probability mass function. It is called a tilted rv relative to $X$, and this exercise, along with Exercise 9.11, will justify our interest in it.
+    \begin{enumerate}[(a)]
+        \item Verify that $\sum_iq_i=1$.
+        \item Verify that $\text{E}[X_r]=\sum_ia_iq_i$ is equal to $\gamma'(r)$.
+        \item Verify that $\text{VAR}[X_r]=\sum_ia_i^2q_i-(\text{E}[X_r])^2$ is equal to $\gamma''(r)$.
+        \item Argue that $\gamma''(r)\geq0$ for all $r$ such that $\text{g}(r)$ exists, and that $\gamma''(r)>0$ if $\gamma''(0)>0$.
+    \end{enumerate}
+    \textbf{Solutions:}
+    \begin{enumerate}[(a)]
+        \item \begin{equation*}
+            \sum_iq_i=\sum_ip_i\exp[a_ir-\gamma(r)]=\sum_i\frac{p_i\exp[a_ir]}{\text{g}(r)}=\frac{\sum_ip_i\exp[a_ir]}{\text{g}(r)}=\frac{\text{g}(r)}{\text{g}(r)}=1
+        \end{equation*}
+        \item \begin{equation*}
+            \begin{split}
+                \text{E}[X_r]&=\sum_ia_iq_i\\
+                &=\sum_ia_ip_i\exp[a_ir-\gamma(r)]\\
+                &=\frac{\sum_ip_ia_i\exp[a_ir]}{\text{g}(r)}\\
+                &=\frac{1}{{\text{g}(r)}}\frac{d\sum_ip_i\exp[a_ir]}{dr}\\
+                &=\frac{\text{g}'(r)}{\text{g}(r)}=\gamma'(r)
+            \end{split}
+        \end{equation*}
+        \item Since
+        \begin{equation*}
+            \begin{split}
+                \sum_ia_i^2q_i &= \sum_ia_i^2p_i\exp[a_ir-\gamma(r)]\\
+                &=\frac{1}{\text{g}(r)}\sum_ip_ia_i^2\exp[a_ir]\\
+                &=\frac{1}{\text{g}(r)}\frac{d\sum_ip_ia_i\exp[a_ir]}{dr}\\
+                &=\frac{1}{\text{g}(r)}\frac{d\text{g}'(r)}{dr}\\
+                &=\frac{\text{g}''(r)}{\text{g}(r)}
+            \end{split}
+        \end{equation*}
+
+        we have
+        \begin{equation*}
+            \begin{split}
+                \text{VAR}[X_r] &=\sum_ia_i^2q_i-(\text{E}[X_r])^2\\
+                &=\frac{\text{g}''(r)}{\text{g}(r)}-\frac{[\text{g}'(r)]^2}{[\text{g}(r)]^2}\\
+                &=\frac{\text{g}''(r)-[\text{g}(r)]^2}{[\text{g}(r)]^2}\\
+                &=\gamma''(r)
+            \end{split}
+        \end{equation*}
+        \item Since $\gamma''(r)=\text{VAR}[X_r]$, it is nonnegative and $\gamma''(r)\geq0$. If $\gamma''(0)>0$, then $\text{VAR}[X]>0$, which means that $X$ is non-atomic. Thus $X_r$ is non-atomic and $\gamma''(r)>0$.
+    \end{enumerate}
+\end{document}

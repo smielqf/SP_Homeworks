@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{ctex}
+\input{../setup/packages}
+\input{../setup/format}
+
+\begin{document}
+    \title{Homework 2 of Dynamic Programming and Optimal Control}
+    \author{姓名：林奇峰\qquad 学号：19110977}
+    \maketitle
+
+    \section{Exercise 4.16}
+    Suppose that a person wants to sell a house and an offer comes at the beginning of each day. We assume that successive offers are independent and an offer is $w_j$ with probability $p_j$, $j=1,\dots,n$, where $w_j$ are given nonnegative scalars. Any offer not immediately accepted is not lost but may be accepted at any later date. Also, a maintenance cost c is incurred for each day that the house remains unsold. The objective is to maximize the price at which the house is sold minus the maintenance costs. Consider the problem when there is a deadline to sell the house within $N$ days and characterize the optimal policy.
+
+    \textbf{Solution:}
+    \begin{itemize}
+        \item State $x_k$: the offer under consideration. $x_k=T$ means the house has been sold.
+        \item Action $u_k$: $u^1$ (sell) and $u^2$ (do not sell)
+        \item State transition:
+            \begin{equation*}
+               \begin{split}
+                    x_{k+1} &=f_k(x_k,u_k,w_k)\\
+                    &=\begin{cases}
+                        T&\text{if $x_k=T$, or $x_k\neq T$ and $u_k=u^1$}\\
+                        w_k &\text{otherwise}
+                    \end{cases}
+               \end{split}
+            \end{equation*}
+            where $x_0=0$, $w_k$ are i.i.d.
+        \item Per-stage reward:
+            \begin{equation*}
+                \begin{aligned}
+                    g_N(x_N)&=\begin{cases}
+                        x_N & \text{if $x_N\neq T$}\\
+                        0 & \text{otherwise}
+                    \end{cases}\\
+                    g_k(x_k,u_k,w_k)&=\begin{cases}
+                        \max\{x_1,\dots,x_k\}-kc & \text{if $x_k\neq T$ and $u_k=u^1$}\\
+                        0 & \text{otherwise}
+                    \end{cases}
+                \end{aligned}
+            \end{equation*}
+        \item Start with
+            \begin{equation*}
+                J_N(x_N)=g_N(x_N)=\begin{cases}
+                    x_N & \text{if $x_N\neq T$}\\
+                    0 & \text{otherwise}
+                \end{cases}
+            \end{equation*}
+            and go backwards using
+            \begin{equation*}
+                \begin{split}
+                    J_k(x_k) &= \max_{u_k}E_{w_k}\{g_k(x_k,u_k,w_k)+J_{k+1}(f_k(x_k,u_k,w_k))\}\\
+                    &=\begin{cases}
+                        \max[\max\{x_1,\dots,x_k\}-kc, E\{J_{k+1}(w)\}] & \text{if $x_k\neq T$}\\
+                        0 & \text{otherwise}
+                    \end{cases}
+                \end{split}
+            \end{equation*}
+        \item Optimal policy
+            \begin{equation*}
+                \begin{aligned}
+                    \text{accept the offer $x_k$ if $x_k>\alpha_k$}\\
+                    \text{reject the offer $x_k$ if $x_k<\alpha_k$}
+                \end{aligned}
+            \end{equation*}
+            where
+            \begin{equation*}
+                \alpha_k=\frac{E{J_{k+1}(w)}}{\max\{x_1,\dots,x_k\}-kc}
+            \end{equation*}
+    \end{itemize}
+\end{document}
